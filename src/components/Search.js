@@ -6,9 +6,10 @@ const Search = (props) => {
     const [alcohol, setAlcohol] = useState("");
     // const [cocktail, setCocktail] = useState("");
     const [error, setError] = useState("");
+    const [savedwwIds, setSavedIds] = useState([]);
 
     async function getCocktails(query, alcohol) {
-      const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}&php?i=${alcohol}`;
+      const url = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${query}&php?i=${alcohol}`;
       try {
         setError("");
         let response = await fetch(url);
@@ -76,11 +77,21 @@ const Search = (props) => {
             </button>
             </div>
             <div>
-              
+                {error.length > 0 && <h1>{error}</h1>}
+                {error.length === 0 &&
+                props.gifs.map((v) => (
+                <CocktailDisplay
+                key={v.id}
+                gif={v}
+                isFavorite={faveIds.includes(v.id)}
+                deleteFavorite={props.deleteFavorite}
+                addFavorite={props.addFavorite}
+            />
+            ))}
             </div>
           </form>
         </div>
-        </>
+      </>
   );    
 };  
 
