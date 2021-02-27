@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { alcoholTypes } from "../shared/AlcoholTypes";
+import { gifApi } from "../shared/GifApi";
 import { setSearch, setUser, addSaved, deleteSaved } from "../redux/actions";
 import { connect } from "react-redux";
 import CocktailDisplay from "./CocktailDisplay";
@@ -115,15 +116,7 @@ const Search = (props) => {
     }
   }
 
-  async function getGifs() {
-    const url = `https://api.giphy.com/v1/gifs/random?api_key=pNd73F2GiTlIEcEnhFBLj9s6WZboo1qp&tag=drunk&rating=pg`;
-    let response = await fetch(url);
-    let json = await response.json();
-    let resGifs = json.data.images.original.url;
-    console.log(json);
-
-    setGif(resGifs);
-  }
+  
 
   return (
     <>
