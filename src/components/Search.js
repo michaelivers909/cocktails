@@ -122,6 +122,7 @@ const Search = (props) => {
     console.log(json);
 
     setGif(resGifs);
+  }
 
   return (
     <>
@@ -223,8 +224,8 @@ function mapStateToProps(state) {
     gif: state.gif,
     drinks: state.search,
     saved: state.saved,
-  }
+  };
 }
-};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
