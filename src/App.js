@@ -14,14 +14,14 @@ function App() {
       <>
         <nav>
           <NavLink to="/Login">Login</NavLink>
-          <NavLink to="/Search">Saved Cocktails</NavLink>
           <NavLink to="/Saved">Search</NavLink>
+          <NavLink to="/Search">Saved Cocktails</NavLink>
         </nav>
         <main>
           <Switch>
-            {/* <Route path="/Login" component={Login} /> */}
+            <Route path="/Login" component={Login} /> 
             <Route path="/Search" component={Search} />
-            {/* <Route path="/Saved" component={Saved} /> */}
+            <Route path="/Saved" component={Saved} /> 
             <Route path="*">
               <Redirect to="/Search" />
             </Route>

@@ -10,6 +10,7 @@ const Search = (props) => {
   const [error, setError] = useState("");
   const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
+  const [cocktails, setCocktails] = useState("");
 
   const savedIds = useMemo(() => {
     return props.saved.map((drink) => drink.id);
@@ -194,8 +195,9 @@ const Search = (props) => {
           <div>
             {error.length > 0 && <h1>{error}</h1>}
             {error.length === 0 &&
-              props.cocktails.map((v) => (
+              props.drinks.map((v) => (
                 <CocktailDisplay
+                  // key={gifs.id}
                   gif={gif}
                   key={v.id}
                   drink={v}
@@ -203,7 +205,7 @@ const Search = (props) => {
                   deleteSaved={props.deleteSaved}
                   addSaved={props.addSaved}
                 />
-              ))}
+              ))};
           </div>
         </form>
       </div>
