@@ -4,7 +4,7 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved }) => {
   console.log(drink);
   return (
     <div>
-      <h2></h2>
+      <h2>Cocktail Results</h2>
       <img src={gif} alt="drunk gif" />
       <div>{drink.drink}</div>
       <img src={drink.thumbnail}></img>
@@ -19,8 +19,8 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved }) => {
       </div>
       <div>{drink.instructions}</div>
 
-      <button onClick={() => addSaved(gif.id)}></button>
-      <button onClick={() => deleteSaved(gif.id)}></button>
+      <button onClick={() => addSaved(gif.id)(drink.id)}></button>
+      <button onClick={() => deleteSaved(gif.id)(drink.id)}></button>
     </div>
   );
 };
