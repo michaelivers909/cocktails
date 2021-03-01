@@ -215,7 +215,6 @@ const Search = (props) => {
                   addSaved={props.addSaved}
                 />
               ))}
-            ;
           </div>
         </form>
       </div>
