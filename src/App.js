@@ -5,6 +5,7 @@ import Saved from "./components/Saved";
 import Login from "./components/Login";
 import { Provider } from "react-redux";
 import Store from "./redux/Store";
+import "./App.css";
 
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
     <Router>
       <>
         <nav>
-          <NavLink to="/Login">Login</NavLink>
-          <NavLink to="/Saved">Search</NavLink>
-          <NavLink to="/Search">Saved Cocktails</NavLink>
+          <NavLink to="/Login" activeClassName="active-link">Login</NavLink>
+          <NavLink to="/Search" activeClassName="active-link">Search</NavLink>
+          <NavLink to="/Saved" activeClassName="active-link">Saved Cocktails</NavLink>
         </nav>
         <main>
           <Switch>

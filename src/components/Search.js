@@ -127,11 +127,13 @@ const Search = (props) => {
 
   return (
     <>
-      <div>
+      <div className="background-main text-center">
         <form>
           <h1>Search By Cocktail or Alcohol Type</h1>
           <div>
-            <label htmlFor="query">Enter A Cocktail Name</label>
+            <div>
+              <label htmlFor="query">Enter A Cocktail Name</label>
+            </div>
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -153,20 +155,24 @@ const Search = (props) => {
             </button>
           </div>
           <div>
-            <label htmlFor="alcohol">Choose an Alcohol Type</label>
-            <select
-              onChange={(e) => {
-                setAlcohol(e.target.value);
-                console.log(e.target.value);
-              }}
-            >
-              ;
-              {alcoholTypes.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.view}
-                </option>
-              ))}
-            </select>
+            <div>
+              <label htmlFor="alcohol">Choose an Alcohol Type</label>
+            </div>
+            <div>
+              <select
+                onChange={(e) => {
+                  setAlcohol(e.target.value);
+                  console.log(e.target.value);
+                }}
+              >
+                ;
+                {alcoholTypes.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.view}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div>
             <button
@@ -181,6 +187,9 @@ const Search = (props) => {
             </button>
           </div>
           <div>
+            <div>
+              <label>Get a Random Cocktail</label>
+            </div>
             <button
               className="submit"
               onClick={(e) => {
@@ -205,13 +214,14 @@ const Search = (props) => {
                   deleteSaved={props.deleteSaved}
                   addSaved={props.addSaved}
                 />
-              ))};
+              ))}
+            ;
           </div>
         </form>
       </div>
     </>
   );
-}
+};
 
 const mapDispatchToProps = {
   setSearch,
@@ -228,6 +238,5 @@ function mapStateToProps(state) {
     saved: state.saved,
   };
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
