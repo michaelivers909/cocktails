@@ -3,7 +3,7 @@ import { ADD_SAVED, DELETE_SAVED } from "../actions";
 function savedReducer(state = [], action) {
   switch (action.type) {
     case ADD_SAVED:
-      return [...state, action.saved];
+      return [...state, {...action.saved, gif: action.gif}];
     case DELETE_SAVED:
       let newState = [...state];
       let idx = newState.findIndex((cocktail) => cocktail.id === action.id);

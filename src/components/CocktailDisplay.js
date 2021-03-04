@@ -1,26 +1,34 @@
 import React, { useState } from "react";
+import { addSaved, deleteSaved } from "../redux/actions";
 
 const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved }) => {
   console.log(drink);
   return (
-    <div>
+    <div className="container drink-container background-everything">
       <h2>Cocktail Results</h2>
-      <img src={gif} alt="drunk gif" />
+      <img className="img-gif center" src={gif} alt="drunk gif" />
       <div>{drink.drink}</div>
-      <img src={drink.thumbnail}></img>
+      <img className="img-drink center" src={drink.thumbnail}></img>
       <div>
         {drink.ingredients.map((v, i) => {
           return (
             <div>
-              ingredient: {i + 1}: {v.ingredient} measure: {v.measure}
+              Ingredient {i + 1}: {v.ingredient} Measure: {v.measure}
             </div>
           );
         })}
       </div>
       <div>{drink.instructions}</div>
 
-      <button onClick={() => addSaved(gif.id)(drink.id)}></button>
-      <button onClick={() => deleteSaved(gif.id)(drink.id)}></button>
+      <button 
+        onClick={(e) => {
+          e.preventDefault(); 
+          
+          addSaved(drink.id)}}>Save This Cocktail!</button>
+      <button 
+        onClick={(e) => {
+          e.preventDefault();
+          deleteSaved(drink.id)}}>Delete From Saved Cocktails</button>
     </div>
   );
 };

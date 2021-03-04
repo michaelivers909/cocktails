@@ -7,12 +7,13 @@ const Login = () => {
   function login() {
     if (username.length > 7 && password.length > 7) {
       history.push("/Search");
-    }
+    } 
   };
   
   return (
     <>
-      <h1>Login</h1>
+    <form className="text-center form-container">
+      <h1>Thirsty? Login For a Drink!</h1>
       <div>
         <label htmlFor="username">Username</label>
         <input
@@ -21,6 +22,8 @@ const Login = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+      </div>
+      <div>
         <label htmlFor="password">Password</label>
         <input
           type="Password"
@@ -28,9 +31,14 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div>
         <button type="submit" onClick={() => login()}>
           Log In
         </button>
+        </div>
+      </div>
+      </form>
+      <div className="container bk-img">
       </div>
     </>
   );

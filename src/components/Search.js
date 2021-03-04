@@ -10,9 +10,9 @@ const Search = (props) => {
   const [error, setError] = useState("");
   const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
-  const [cocktails, setCocktails] = useState("");
+  const [savedIds, setSavedIds] = useState("");
 
-  const savedIds = useMemo(() => {
+  useMemo(() => {
     return props.saved.map((drink) => drink.id);
   }, [props.saved]);
 
@@ -38,6 +38,7 @@ const Search = (props) => {
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
           instructions: val.strInstructions,
+          id: val.idDrink,
         };
       });
       console.log(resCocktails);
@@ -70,6 +71,7 @@ const Search = (props) => {
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
           instructions: val.strInstructions,
+          id: val.idDrink,
         };
       });
       const shuffled = [...resCocktails].sort(() => 0.5 - Math.random());
@@ -105,6 +107,7 @@ const Search = (props) => {
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
           instructions: val.strInstructions,
+          id: val.idDrink,
         };
       });
       console.log(resCocktails);
@@ -127,8 +130,8 @@ const Search = (props) => {
 
   return (
     <>
-      <div className="background-main text-center">
-        <form>
+      <div className="background-everything text-center">
+        <form className="form-container">
           <h1>Search By Cocktail or Alcohol Type</h1>
           <div>
             <div>
@@ -206,7 +209,6 @@ const Search = (props) => {
             {error.length === 0 &&
               props.drinks.map((v) => (
                 <CocktailDisplay
-                  // key={gifs.id}
                   gif={gif}
                   key={v.id}
                   drink={v}

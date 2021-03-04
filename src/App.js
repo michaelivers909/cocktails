@@ -13,10 +13,10 @@ function App() {
     <Provider store={Store}>
     <Router>
       <>
-        <nav>
-          <NavLink to="/Login" activeClassName="active-link">Login</NavLink>
-          <NavLink to="/Search" activeClassName="active-link">Search</NavLink>
-          <NavLink to="/Saved" activeClassName="active-link">Saved Cocktails</NavLink>
+        <nav className="navContainer">
+          <NavLink to="/Login" className=" navLink text-center" activeClassName="active-link">Login</NavLink>
+          <NavLink to="/Search" className="navLink text-center" activeClassName="active-link">Search</NavLink>
+          <NavLink to="/Saved" className=" navLink text-center"activeClassName="active-link">Saved Cocktails</NavLink>
         </nav>
         <main>
           <Switch>
