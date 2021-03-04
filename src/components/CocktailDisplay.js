@@ -19,16 +19,18 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
         })}
       </div>
       <div>{drink.instructions}</div>
-
+      {!isSaved && (
       <button 
         onClick={(e) => {
           e.preventDefault(); 
-          
-          addSaved(gif, drink)}}>Save This Cocktail!</button>
+          addSaved(gif, drink)}}> {" "}Save This Cocktail!</button>
+      )}
+      {isSaved && (
       <button className=""
         onClick={(e) => {
           e.preventDefault();
-          deleteSaved(drink.id)}}>Delete From Saved Cocktails</button>
+          deleteSaved(drink.id)}}> {" "}Delete From Saved Cocktails</button>
+  )}
     </div>
   );
 };
