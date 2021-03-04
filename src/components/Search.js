@@ -10,9 +10,9 @@ const Search = (props) => {
   const [error, setError] = useState("");
   const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
-  const [savedIds, setSavedIds] = useState("");
+  
 
-  useMemo(() => {
+  const savedIds = useMemo(() => {
     return props.saved.map((drink) => drink.id);
   }, [props.saved]);
 

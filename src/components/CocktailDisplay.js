@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { addSaved, deleteSaved } from "../redux/actions";
 
-const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved }) => {
+const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
   console.log(drink);
   return (
-    <div className="container drink-container background-everything">
+    <div className="drink-container background-everything">
       <h2>Cocktail Results</h2>
       <img className="img-gif center" src={gif} alt="drunk gif" />
       <div>{drink.drink}</div>
@@ -24,8 +24,8 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved }) => {
         onClick={(e) => {
           e.preventDefault(); 
           
-          addSaved(drink.id)}}>Save This Cocktail!</button>
-      <button 
+          addSaved(gif, drink)}}>Save This Cocktail!</button>
+      <button className=""
         onClick={(e) => {
           e.preventDefault();
           deleteSaved(drink.id)}}>Delete From Saved Cocktails</button>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Background from "../shared/bartender2.png";
 const Login = () => {
   const history = useHistory();
   const [username, setUsername] = useState("");
@@ -38,7 +39,11 @@ const Login = () => {
         </div>
       </div>
       </form>
-      <div className="container bk-img">
+      <div className="bk-img" style={{ backgroundImage: `url(${Background})`,
+      // backgroundRepeat: "no-repeat",
+      // width: "400px",
+      
+      }}>
       </div>
     </>
   );

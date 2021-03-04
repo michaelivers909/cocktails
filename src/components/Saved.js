@@ -11,7 +11,7 @@ const Saved = (props) => {
       <div>
         {props.saved.map((v) => (
           <CocktailDisplay
-            // gif={gif}
+            gif={v.gif}
             key={v.id}
             drink={v}
             isSaved={true}
