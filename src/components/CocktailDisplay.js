@@ -13,7 +13,7 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
         {drink.ingredients.map((v, i) => {
           return (
             <div>
-              Ingredient {i + 1}: {v.ingredient} Measure: {v.measure}
+              Ingredient {i + 1}: {v.ingredient} Measurement: {v.measure}
             </div>
           );
         })}

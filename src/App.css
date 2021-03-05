@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lakki+Reddy&display=swap');
 * {
-  font-family: 'Merienda', cursive;
+  font-family: 'Lakki Reddy', cursive;
 }
 
 .color {
@@ -50,6 +49,9 @@
   flex-basis: calc(100% / 3 - 8px);
   border: 2px solid black;
   display: block;
+  width: 365px;
+  margin: auto;
+
 }
 
 .drink-container {
@@ -81,6 +83,7 @@ button {
   border-radius: 20px;
   border: 1px solid black;
   color: lemonchiffon;
+  margin:auto;
 }
 
 /* images */

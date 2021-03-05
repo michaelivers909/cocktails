@@ -1,5 +1,4 @@
 export const alcoholTypes = [
-    {view:"", value:""},
     {view: "Whiskey", value: "whiskey"},
     {view: "Vodka", value: "vodka"},
     {view: "Gin", value: "gin"},

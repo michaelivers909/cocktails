@@ -10,7 +10,6 @@ const Search = (props) => {
   const [error, setError] = useState("");
   const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
-  
 
   const savedIds = useMemo(() => {
     return props.saved.map((drink) => drink.id);
@@ -128,6 +127,17 @@ const Search = (props) => {
     setGif(resGifs);
   }
 
+  // top = document.getElementById("top");
+  // function scrollFunction() {
+    // if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    // } else {
+    // }
+  // }
+  // function topFunction() {
+    // document.body.scrollTop = 0;
+    // document.documentElement.scrollTop = 0;
+  // }
+
   return (
     <>
       <div className="background-everything text-center">
@@ -201,24 +211,27 @@ const Search = (props) => {
                 getGifs();
               }}
             >
-              Get Me Anything
+              Get Me Anything!
             </button>
           </div>
-          <div>
-            {error.length > 0 && <h1>{error}</h1>}
-            {error.length === 0 &&
-              props.drinks.map((v) => (
-                <CocktailDisplay
-                  gif={gif}
-                  key={v.id}
-                  drink={v}
-                  isSaved={savedIds.includes(v.id)}
-                  deleteSaved={props.deleteSaved}
-                  addSaved={props.addSaved}
-                />
-              ))}
-          </div>
         </form>
+        <div>
+          {error.length > 0 && <h1>{error}</h1>}
+          {error.length === 0 &&
+            props.drinks.map((v) => (
+              <CocktailDisplay
+                gif={gif}
+                key={v.id}
+                drink={v}
+                isSaved={savedIds.includes(v.id)}
+                deleteSaved={props.deleteSaved}
+                addSaved={props.addSaved}
+              />
+            ))}
+          {/* <button onClick="topFunction()" id="top" title="Go to top"> */}
+            {/* Go To Top */}
+          {/* </button> */}
+        </div>
       </div>
     </>
   );
