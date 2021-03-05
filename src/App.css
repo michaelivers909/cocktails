@@ -55,7 +55,7 @@
 }
 
 .drink-container {
-  flex-basis: calc(100% / 2 -10px);
+  flex-basis: calc(100% / 2 - 10px);
   margin: 5px;
   flex-direction: column;
 }

@@ -105,6 +105,7 @@ const Search = (props) => {
           drink: val.strDrink,
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
+          // measurements: measurements,
           instructions: val.strInstructions,
           id: val.idDrink,
         };

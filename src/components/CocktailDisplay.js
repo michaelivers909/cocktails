@@ -13,24 +13,36 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
         {drink.ingredients.map((v, i) => {
           return (
             <div>
-              Ingredient {i + 1}: {v.ingredient} Measurement: {v.measure}
+              Ingredient {i + 1}: {v.ingredient}, &nbsp;&nbsp; Measurement:{" "}
+              {v.measure}
             </div>
           );
         })}
       </div>
       <div>{drink.instructions}</div>
       {!isSaved && (
-      <button 
-        onClick={(e) => {
-          e.preventDefault(); 
-          addSaved(gif, drink)}}> {" "}Save This Cocktail!</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            addSaved(gif, drink);
+          }}
+        >
+          {" "}
+          Save This Cocktail!
+        </button>
       )}
       {isSaved && (
-      <button className=""
-        onClick={(e) => {
-          e.preventDefault();
-          deleteSaved(drink.id)}}> {" "}Delete From Saved Cocktails</button>
-  )}
+        <button
+          className=""
+          onClick={(e) => {
+            e.preventDefault();
+            deleteSaved(drink.id);
+          }}
+        >
+          {" "}
+          Delete From Saved Cocktails
+        </button>
+      )}
     </div>
   );
 };
