@@ -3,15 +3,48 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Background from "../shared/bartender2.png";
 import { setUser } from "../redux/actions";
+
 const Login = (props) => {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  function login() {
-    if (username.length > 7 && password.length > 7) {
-      props.setUser(username);
-      history.push("/Search");
-    } 
+  const [error, setError] = useState("");
+
+  async function login() {
+    setError("");
+    if (
+      username.length < 7 ||
+      username.length > 16 ||
+      password.length > 20 ||
+      password.length < 7
+    ) {
+      setError(
+        "Username must be between 7 and 16 characters and Password must be between 7 and 20 characters"
+      );
+
+      return;
+    }
+    try {
+      const response = await fetch("/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      });
+      const json = await response.json();
+      if (json.error) {
+        setError(json.error);
+      } else {
+        props.setUser(json.data.username);
+        history.push("/search");
+      }
+    } catch (err) {
+      setError("Something went wrong, please try again later.");
+      console.log(err);
+    }
+    // props.setUser(username);
+    // history.push("/Search");
   }
 
   return (
@@ -36,9 +69,21 @@ const Login = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div>
-            <button type="submit" onClick={() => login()}>
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                login();
+              }}
+            >
               Log In
             </button>
+            {/* div that only shows if error */}
+            {error.length > 0 && (
+              <h3 style={{ color: "red" }} className="text-center">
+                {error}
+              </h3>
+            )}
           </div>
         </div>
       </form>
