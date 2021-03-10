@@ -21,7 +21,6 @@ const Search = (props) => {
       setError("");
       let response = await fetch(url);
       let json = await response.json();
-      console.log(json);
       let resCocktails = json.drinks.map((val) => {
         let ingredients = [];
         for (let i = 1; i <= 15; i++) {
@@ -54,7 +53,6 @@ const Search = (props) => {
       setError("");
       let response = await fetch(url);
       let json = await response.json();
-      console.log(json);
       let resCocktails = json.drinks.map((val) => {
         let ingredients = [];
         for (let i = 1; i <= 15; i++) {
@@ -90,7 +88,6 @@ const Search = (props) => {
       setError("");
       let response = await fetch(url);
       let json = await response.json();
-      console.log(json);
       let resCocktails = json.drinks.map((val) => {
         let ingredients = [];
         for (let i = 1; i <= 15; i++) {
@@ -109,7 +106,6 @@ const Search = (props) => {
           id: val.idDrink,
         };
       });
-      console.log(resCocktails);
       props.setSearch(resCocktails);
     } catch (e) {
       setError("Something went wrong. Check your search parameters.");
@@ -204,35 +200,37 @@ const Search = (props) => {
             </button>
           </div>
         </form>
-        
+
         <div>
           {error.length > 0 && <h1>{error}</h1>}
           {error.length === 0 && props.drinks.length > 0 && (
-            
-          <>
+            <>
               <h2>Cocktail Results</h2>
               <div>
-              {props.drinks.map((v) => (
-              <CocktailDisplay
-                gif={gif}
-                key={v.id}
-                drink={v}
-                isSaved={savedIds.includes(v.id)}
-                deleteSaved={props.deleteSaved}
-                addSaved={props.addSaved}
-              />
-            ))}
-            </div>
-                <button onClick={(e) => {e.preventDefault();
-                        window.scrollTo(0, 0);}}>
-                Back to Top</button>
-            <div>
-
-            </div>
-        </>
+                {props.drinks.map((v) => (
+                  <CocktailDisplay
+                    gif={gif}
+                    key={v.id}
+                    drink={v}
+                    isSaved={savedIds.includes(v.id)}
+                    deleteSaved={props.deleteSaved}
+                    addSaved={props.addSaved}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Back to Top
+              </button>
+              <div></div>
+            </>
           )}
+        </div>
       </div>
-    </div>
     </>
   );
 };

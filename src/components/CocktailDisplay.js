@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { addSaved, deleteSaved } from "../redux/actions";
 
 const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
-  console.log(drink);
   return (
     <div className="drink-container background-everything">
       <img className="img-gif center" src={gif} alt="drunk gif" />

@@ -81,7 +81,6 @@ const Login = (props) => {
             <div>
             <NavLink to="/signup">Not a user? Signup here</NavLink>
             </div>
-            {/* div that only shows if error */}
             {error.length > 0 && (
               <h3 style={{ color: "red" }} className="text-center">
                 {error}
