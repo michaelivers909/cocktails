@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Background from "../shared/bartender2.png";
 import { setUser } from "../redux/actions";
 
@@ -43,8 +43,8 @@ const Login = (props) => {
       setError("Something went wrong, please try again later.");
       console.log(err);
     }
-    // props.setUser(username);
-    // history.push("/Search");
+    props.setUser(username);
+    history.push("/Search");
   }
 
   return (
@@ -78,6 +78,9 @@ const Login = (props) => {
             >
               Log In
             </button>
+            <div>
+            <NavLink to="/signup">Not a user? Signup here</NavLink>
+            </div>
             {/* div that only shows if error */}
             {error.length > 0 && (
               <h3 style={{ color: "red" }} className="text-center">
@@ -101,5 +104,5 @@ const mapDispatchToProps = {
 
 function mapStateToProps(state) {
   return {};
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

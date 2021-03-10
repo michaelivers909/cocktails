@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import Search from "./components/Search";
 import {
   NavLink,
@@ -9,13 +9,31 @@ import {
 } from "react-router-dom";
 import Saved from "./components/Saved";
 import Login from "./components/Login";
-import { Provider } from "react-redux";
+import { DrinkContext, initialState } from "./shared/DrinkContext";
+import { useSelector } from "react-redux";
 import Store from "./redux/Store";
 import "./App.css";
+import axios from "axios";
+import { useSelectors, useActionCreators } from "use-redux";
+import { usernameSelector } from "./redux/selectors/UserSelectors";
+import { clearUser, setUser } from "./redux/actions";
+import SignUp from "./components/SignUp";
 
 function App() {
+  const [globalState, setGlobalState] = useState(initialState);
+  const [username] = useSelectors(usernameSelector);
+  const [logout, login] = useActionCreators(clearUser, setUser);
+
+  useEffect(async () => {
+    try {
+      const json = await axios.get("/authenticate");
+      if (json.data.success) {
+        login(json.data.data.username);
+      }
+    } catch (err) {}
+  }, []);
   return (
-    <Provider store={Store}>
+    
       <Router>
         <>
           <nav className="navContainer">
@@ -44,6 +62,7 @@ function App() {
           <main>
             <Switch>
               <Route path="/Login" component={Login} />
+              <Route path="/SignUp" component={SignUp}/>
               <Route path="/Search" component={Search} />
               <Route path="/Saved" component={Saved} />
               <Route path="*">
@@ -53,7 +72,7 @@ function App() {
           </main>
         </>
       </Router>
-    </Provider>
+    
   );
 }
 

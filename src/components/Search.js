@@ -105,7 +105,6 @@ const Search = (props) => {
           drink: val.strDrink,
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
-          // measurements: measurements,
           instructions: val.strInstructions,
           id: val.idDrink,
         };
@@ -127,17 +126,6 @@ const Search = (props) => {
 
     setGif(resGifs);
   }
-
-  // top = document.getElementById("top");
-  // function scrollFunction() {
-    // if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    // } else {
-    // }
-  // }
-  // function topFunction() {
-    // document.body.scrollTop = 0;
-    // document.documentElement.scrollTop = 0;
-  // }
 
   return (
     <>
@@ -216,10 +204,15 @@ const Search = (props) => {
             </button>
           </div>
         </form>
+        
         <div>
           {error.length > 0 && <h1>{error}</h1>}
-          {error.length === 0 &&
-            props.drinks.map((v) => (
+          {error.length === 0 && props.drinks.length > 0 && (
+            
+          <>
+              <h2>Cocktail Results</h2>
+              <div>
+              {props.drinks.map((v) => (
               <CocktailDisplay
                 gif={gif}
                 key={v.id}
@@ -229,11 +222,17 @@ const Search = (props) => {
                 addSaved={props.addSaved}
               />
             ))}
-          {/* <button onClick="topFunction()" id="top" title="Go to top"> */}
-            {/* Go To Top */}
-          {/* </button> */}
-        </div>
+            </div>
+                <button onClick={(e) => {e.preventDefault();
+                        window.scrollTo(0, 0);}}>
+                Back to Top</button>
+            <div>
+
+            </div>
+        </>
+          )}
       </div>
+    </div>
     </>
   );
 };

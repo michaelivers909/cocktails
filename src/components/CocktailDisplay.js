@@ -5,9 +5,8 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
   console.log(drink);
   return (
     <div className="drink-container background-everything">
-      <h2>Cocktail Results</h2>
       <img className="img-gif center" src={gif} alt="drunk gif" />
-      <div>{drink.drink}</div>
+      <h3>{drink.drink}</h3>
       <img className="img-drink center" src={drink.thumbnail}></img>
       <div>
         {drink.ingredients.map((v, i) => {
