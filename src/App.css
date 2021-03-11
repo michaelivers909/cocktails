@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Lakki+Reddy&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lakki+Reddy&display=swap");
 * {
-  font-family: 'Lakki Reddy', cursive;
+  font-family: "Lakki Reddy", cursive;
 }
 
 .color {
-
 }
 /* shared */
 .text-center {
@@ -51,7 +50,6 @@
   display: block;
   width: 365px;
   margin: auto;
-
 }
 
 .drink-container {
@@ -83,7 +81,7 @@ button {
   border-radius: 20px;
   border: 1px solid black;
   color: lemonchiffon;
-  margin:auto;
+  margin: auto;
 }
 
 /* images */
@@ -96,7 +94,7 @@ button {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 .img-gif {
@@ -112,5 +110,3 @@ button {
   margin-left: auto;
   margin-right: auto;
 }
-
-

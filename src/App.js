@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useMemo, useState} from "react";
 import Search from "./components/Search";
 import {
   NavLink,
@@ -15,25 +15,43 @@ import Store from "./redux/Store";
 import "./App.css";
 import axios from "axios";
 import { useSelectors, useActionCreators } from "use-redux";
-import { usernameSelector } from "./redux/selectors/UserSelectors";
+import { usernameSelector, userSelector } from "./redux/selectors/UserSelectors";
 import { clearUser, setUser } from "./redux/actions";
 import SignUp from "./components/SignUp";
+import ProtectedRoute from "./shared/ProtectedRoute";
 
 function App() {
   const [globalState, setGlobalState] = useState(initialState);
-  const [username] = useSelectors(usernameSelector);
-  const [logout, login] = useActionCreators(clearUser, setUser);
+  const [username, user] = useSelectors(usernameSelector, userSelector);
+  const [clearUserFromState, setUserInState] = useActionCreators(
+    clearUser,
+    setUser
+  );
+
+  const isAuth = useMemo(() => {
+    return username.length > 0;
+  }, [user]);
 
   useEffect(async () => {
     try {
       const json = await axios.get("/authenticate");
       if (json.data.success) {
-        login(json.data.data.username);
+        Login(json.data.data.username);
       }
     } catch (err) {}
   }, []);
+
+  async function logout() {
+    try {
+      const { data } = await axios("/users/logout");
+      clearUserFromState ();
+    } catch (err) {
+
+    }
+  }
+  
   return (
-    
+    <DrinkContext.Provider value={[globalState, setGlobalState]}>
       <Router>
         <>
           <nav className="navContainer">
@@ -60,19 +78,20 @@ function App() {
             </NavLink>
           </nav>
           <main>
+            <button onClick={() => logout()}>Log Out</button>
             <Switch>
-              <Route path="/Login" component={Login} />
-              <Route path="/SignUp" component={SignUp}/>
-              <Route path="/Search" component={Search} />
-              <Route path="/Saved" component={Saved} />
-              <Route path="*">
-                <Redirect to="/Search" />
-              </Route>
+              <ProtectedRoute isAuth={isAuth} path="/Login" authRequired={false} component={Login} />
+              <ProtectedRoute isAuth={isAuth} path="/SignUp" authRequired={false} component={SignUp}/>
+              <ProtectedRoute isAuth={isAuth} path="/Search" authRequired={true} component={Search} />
+              <ProtectedRoute isAuth={isAuth} path="/Saved" authRequired={true} component={Saved} />
+              <ProtectedRoute isAuth={isAuth} path="*">
+                <Redirect to="/Login" />
+              </ProtectedRoute>
             </Switch>
           </main>
         </>
       </Router>
-    
+    </DrinkContext.Provider>
   );
 }
 
