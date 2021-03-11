@@ -3,7 +3,6 @@ import Search from "./components/Search";
 import {
   NavLink,
   Switch,
-  Route,
   BrowserRouter as Router,
   Redirect,
 } from "react-router-dom";
@@ -42,7 +41,7 @@ function App() {
   async function logout() {
     try {
       const { data } = await axios("/users/logout");
-      clearUserFromState ();
+      clearUserFromState();
     } catch (err) {
 
     }
@@ -53,17 +52,6 @@ function App() {
       <Router>
         <>
           <nav className="navContainer">
-            {username.length === 0 && (
-            <>
-            <NavLink
-              to="/Login"
-              className=" navLink text-center"
-              activeClassName="active-link"
-            >
-              Login
-            </NavLink>
-            </>
-            )}
             {username.length > 0 && (
             <>
             <NavLink
@@ -85,7 +73,9 @@ function App() {
           </nav>
             
           <main>
+          {username.length > 0 && (
             <button className="right" onClick={() => logout()}>Log Out</button>
+          )}
             <Switch>
               <ProtectedRoute isAuth={isAuth} path="/Login" authRequired={false} component={Login} />
               <ProtectedRoute isAuth={isAuth} path="/SignUp" authRequired={false} component={SignUp}/>

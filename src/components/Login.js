@@ -33,8 +33,9 @@ const Login = (props) => {
         body: JSON.stringify({ username: username, password: password }),
       });
       const json = await response.json();
-      if (json.error) {
-        setError(json.error);
+      console.log(json)
+      if (json.success === false) {
+        setError("Invalid Username or Password");
       } else {
         props.setUser(json.data.username);
         history.push("/search");
@@ -44,7 +45,7 @@ const Login = (props) => {
       console.log(err);
     }
     props.setUser(username);
-    history.push("/Search");
+    // history.push("/Search");
   }
 
   return (

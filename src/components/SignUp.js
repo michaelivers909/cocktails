@@ -78,6 +78,9 @@ const SignUp = (props) => {
                 {error}
               </h3>
             )}
+            <div>
+            <NavLink to="/login">Already a member? Log in here!</NavLink>
+            </div>
           </div>
         </div>
       </form>
