@@ -44,8 +44,7 @@ const Login = (props) => {
       setError("Something went wrong, please try again later.");
       console.log(err);
     }
-    props.setUser(username);
-    // history.push("/Search");
+    
   }
 
   return (
