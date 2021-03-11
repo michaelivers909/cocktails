@@ -10,8 +10,6 @@ import {
 import Saved from "./components/Saved";
 import Login from "./components/Login";
 import { DrinkContext, initialState } from "./shared/DrinkContext";
-import { useSelector } from "react-redux";
-import Store from "./redux/Store";
 import "./App.css";
 import axios from "axios";
 import { useSelectors, useActionCreators } from "use-redux";
@@ -55,6 +53,8 @@ function App() {
       <Router>
         <>
           <nav className="navContainer">
+            {username.length === 0 && (
+            <>
             <NavLink
               to="/Login"
               className=" navLink text-center"
@@ -62,6 +62,10 @@ function App() {
             >
               Login
             </NavLink>
+            </>
+            )}
+            {username.length > 0 && (
+            <>
             <NavLink
               to="/Search"
               className="navLink text-center"
@@ -76,9 +80,12 @@ function App() {
             >
               Saved Cocktails
             </NavLink>
+            </>
+            )}
           </nav>
+            
           <main>
-            <button onClick={() => logout()}>Log Out</button>
+            <button className="right" onClick={() => logout()}>Log Out</button>
             <Switch>
               <ProtectedRoute isAuth={isAuth} path="/Login" authRequired={false} component={Login} />
               <ProtectedRoute isAuth={isAuth} path="/SignUp" authRequired={false} component={SignUp}/>

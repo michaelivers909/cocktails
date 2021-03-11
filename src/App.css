@@ -10,6 +10,20 @@
   text-align: center;
 }
 
+button {
+  background-color: cadetblue;
+  border-radius: 20px;
+  border: 1px solid black;
+  color: lemonchiffon;
+  margin: auto;
+}
+
+.right {
+  display: block;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
 /* Nav */
 
 .navContainer {
@@ -19,7 +33,7 @@
 }
 
 .navLink {
-  flex-basis: calc(100% / 3 - 10px);
+  flex-basis: calc(100% / 2 - 10px);
   color: lemonchiffon;
   text-decoration: none;
   border-radius: 20px;
@@ -74,14 +88,6 @@ body {
   background-position: top left;
   background-repeat: repeat;
   background-attachment: fixed;
-}
-
-button {
-  background-color: cadetblue;
-  border-radius: 20px;
-  border: 1px solid black;
-  color: lemonchiffon;
-  margin: auto;
 }
 
 /* images */
