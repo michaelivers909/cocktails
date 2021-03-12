@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { addSaved, deleteSaved } from "../redux/actions";
+import React from "react";
 
 const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
   return (
@@ -10,7 +9,7 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
       <div>
         {drink.ingredients.map((v, i) => {
           return (
-            <div>
+            <div key={i}>
               Ingredient {i + 1}: {v.ingredient}, &nbsp;&nbsp; Measurement:{" "}
               {v.measure}
             </div>

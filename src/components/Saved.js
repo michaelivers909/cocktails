@@ -8,6 +8,7 @@ const Saved = (props) => {
     <>
     <div className="background-everything text-center">
       <h1>Saved Cocktails</h1>
+      {props.saved.length && (
       <div>
         {props.saved.map((v) => (
           <CocktailDisplay
@@ -19,6 +20,10 @@ const Saved = (props) => {
           />
         ))}
       </div>
+      )}
+      {props.saved.length === 0 && (
+        <h2>You don't have any saved cocktails yet!</h2>
+      )}
     </div>
     </>);
   };

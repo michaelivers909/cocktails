@@ -56,7 +56,7 @@ const Search = (props) => {
       let resCocktails = json.drinks.map((val) => {
         let ingredients = [];
         for (let i = 1; i <= 15; i++) {
-          if (val[`strIngredient${i}`] !== null) {
+          if (val[`strIngredient${i}`] ) {
             ingredients.push({
               ingredient: val[`strIngredient${i}`],
               measure: val[`strMeasure${i}`],
@@ -160,7 +160,7 @@ const Search = (props) => {
               <select
                 onChange={(e) => {
                   setAlcohol(e.target.value);
-                  console.log(e.target.value);
+
                 }}
               >
                 ;
