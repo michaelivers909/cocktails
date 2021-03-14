@@ -31,9 +31,9 @@ function App() {
 
   useEffect(async () => {
     try {
-      const json = await axios.get("/authenticate");
+      const json = await axios.get("/users/authenticate");
       if (json.data.success) {
-        Login(json.data.data.username);
+        setUserInState(json.data.data.username);
       }
     } catch (err) {}
   }, []);

@@ -1,6 +1,8 @@
 import React from "react";
 
-const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
+
+
+const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved, moreInfo }) => {
   return (
     <div className="drink-container background-everything">
       <img className="img-gif center" src={gif} alt="drunk gif" />
@@ -30,7 +32,6 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
       )}
       {isSaved && (
         <button
-          className=""
           onClick={(e) => {
             e.preventDefault();
             deleteSaved(drink.id);
@@ -38,6 +39,17 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved }) => {
         >
           {" "}
           Delete From Saved Cocktails
+        </button>
+      )}
+      {!isSaved && drink.ingredients.length === "0" (
+        <button
+        onClick={(e) => {
+          e.preventDefault();
+          moreInfo(drink.id);
+        }}
+        >
+         {" "} 
+         Get Cocktail Information
         </button>
       )}
     </div>

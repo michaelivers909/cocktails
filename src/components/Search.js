@@ -10,6 +10,7 @@ const Search = (props) => {
   const [error, setError] = useState("");
   const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
+  const [cocktailId, setCocktailId] = useState("");
 
   const savedIds = useMemo(() => {
     return props.saved.map((drink) => drink.id);
@@ -39,10 +40,11 @@ const Search = (props) => {
           id: val.idDrink,
         };
       });
-      console.log(resCocktails);
+      console.log(resCocktails)
       props.setSearch(resCocktails);
     } catch (e) {
       setError("Something went wrong. Check your search parameters.");
+      
       setQuery([]);
     }
   }
@@ -79,6 +81,36 @@ const Search = (props) => {
     } catch (e) {
       setError("Something went wrong. Check your search parameters.");
       setAlcohol([]);
+    }
+  }
+  async function getByCocktailId(cocktailId) {
+    const url = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${cocktailId}`;
+    try {
+      setError("");
+      let response = await fetch(url);
+      let json = await response.json();
+      let resCocktails = json.drinks.map((val) => {
+        let ingredients = [];
+        for (let i = 1; i <= 15; i++) {
+          if (val[`strIngredient${i}`] ) {
+            ingredients.push({
+              ingredient: val[`strIngredient${i}`],
+              measure: val[`strMeasure${i}`],
+            });
+          }
+        }
+        return {
+          drink: val.strDrink,
+          thumbnail: val.strDrinkThumb,
+          ingredients: ingredients,
+          instructions: val.strInstructions,
+          id: val.idDrink,
+        };
+      });
+      props.setSearch(resCocktails);
+    } catch (e) {
+      setError("Something went wrong. Check your search parameters.");
+      setCocktailId([]);
     }
   }
 
@@ -215,6 +247,7 @@ const Search = (props) => {
                     isSaved={savedIds.includes(v.id)}
                     deleteSaved={props.deleteSaved}
                     addSaved={props.addSaved}
+                    moreInfo={props.moreInfo}
                   />
                 ))}
               </div>
