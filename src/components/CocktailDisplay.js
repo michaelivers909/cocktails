@@ -39,7 +39,7 @@ import React, { useEffect, useState } from "react";
 // 
 // 
 // needs to be in curly brackets
-const CocktailDisplay = ({ drink, setGif, addSaved, deleteSaved, isSaved}) => {
+const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved}) => {
   return (
     <div className="drink-container background-everything">
       <img className="img-gif center" src={gif} alt="drunk gif" />

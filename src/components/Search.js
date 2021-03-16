@@ -8,7 +8,6 @@ const Search = (props) => {
   const [query, setQuery] = useState("");
   const [alcohol, setAlcohol] = useState("");
   const [error, setError] = useState("");
-  // const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
 
   const savedIds = useMemo(() => {
@@ -114,12 +113,12 @@ const Search = (props) => {
     }
   }
 
-  async function setGif() {
+  async function getGif() {
     const url = `https://api.giphy.com/v1/gifs/random?api_key=pNd73F2GiTlIEcEnhFBLj9s6WZboo1qp&tag=drunk&rating=pg`;
     let response = await fetch(url);
     let json = await response.json();
     let resGifs = json.data.images.original.url;
-    console.log(json);
+    console.log(resGifs);
 
     props.setGif(resGifs);
   }
@@ -147,7 +146,7 @@ const Search = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 getCocktails(query);
-                setGif();
+                getGif();
               }}
             >
               I'm Thirsty!
@@ -179,7 +178,7 @@ const Search = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 getByAlcohol(alcohol);
-                setGif();
+                getGif();
               }}
             >
               Get Me a Drink!
@@ -194,7 +193,7 @@ const Search = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 getRandom(random);
-                setGif();
+                getGif();
               }}
             >
               Get Me Anything!
@@ -210,7 +209,7 @@ const Search = (props) => {
               <div>
                 {props.drinks.map((v) => (
                   <CocktailDisplay
-                    gif={props.setGif}
+                    gif={props.gif}
                     key={v.id}
                     drink={v}
                     isSaved={savedIds.includes(v.id)}

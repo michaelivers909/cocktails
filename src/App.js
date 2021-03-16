@@ -5,6 +5,7 @@ import {
   Switch,
   BrowserRouter as Router,
   Redirect,
+  Route
 } from "react-router-dom";
 import Saved from "./components/Saved";
 import Login from "./components/Login";
@@ -81,9 +82,9 @@ function App() {
               <ProtectedRoute isAuth={isAuth} path="/SignUp" authRequired={false} component={SignUp}/>
               <ProtectedRoute isAuth={isAuth} path="/Search" authRequired={true} component={Search} />
               <ProtectedRoute isAuth={isAuth} path="/Saved" authRequired={true} component={Saved} />
-              <ProtectedRoute isAuth={isAuth} path="*">
+              <Route path="*">
                 <Redirect to="/Login" />
-              </ProtectedRoute>
+              </Route>
             </Switch>
           </main>
         </>
