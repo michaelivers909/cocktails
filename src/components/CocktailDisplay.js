@@ -1,8 +1,45 @@
-import React from "react";
-
-
-
-const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved, moreInfo }) => {
+import React, { useEffect, useState } from "react";
+// 
+// const [error, setError] = useState("");
+// 
+// 
+// async function moreInfo(id) {
+  // const url = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${id}`;
+  // try {
+    // setError("");
+    // let response = await fetch(url);
+    // let json = await response.json();
+    // let resCocktails = json.drinks.map((val) => {
+      // let ingredients = [];
+      // for (let i = 1; i <= 15; i++) {
+        // if (val[`strIngredient${i}`] !== null) {
+          // ingredients.push({
+            // ingredient: val[`strIngredient${i}`],
+            // measure: val[`strMeasure${i}`],
+          // });
+        // }
+      // }
+      // return {
+        // drink: val.strDrink,
+        // thumbnail: val.strDrinkThumb,
+        // ingredients: ingredients,
+        // instructions: val.strInstructions,
+        // id: val.idDrink,
+      // };
+    // });
+    // console.log(resCocktails)
+    // props.setSearch(resCocktails);
+  // } catch (e) {
+    // setError("Something went wrong. Check your search parameters.");
+    // 
+    // setQuery([]);
+  // }
+// }
+// 
+// 
+// 
+// needs to be in curly brackets
+const CocktailDisplay = ({ drink, setGif, addSaved, deleteSaved, isSaved}) => {
   return (
     <div className="drink-container background-everything">
       <img className="img-gif center" src={gif} alt="drunk gif" />
@@ -41,17 +78,19 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved, moreInfo 
           Delete From Saved Cocktails
         </button>
       )}
-      {!isSaved && drink.ingredients.length === "0" (
+      <div>
+      {!isSaved && drink.ingredients.length === 0 && (
         <button
         onClick={(e) => {
           e.preventDefault();
-          moreInfo(drink.id);
+          // moreInfo(drink.id);
         }}
         >
          {" "} 
          Get Cocktail Information
         </button>
       )}
+      </div>
     </div>
   );
 };

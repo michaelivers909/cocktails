@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { alcoholTypes } from "../shared/AlcoholTypes";
-import { setSearch, setUser, addSaved, deleteSaved } from "../redux/actions";
+import { setSearch, setUser, setGif, addSaved, deleteSaved } from "../redux/actions";
 import { connect } from "react-redux";
 import CocktailDisplay from "./CocktailDisplay";
 
@@ -8,9 +8,8 @@ const Search = (props) => {
   const [query, setQuery] = useState("");
   const [alcohol, setAlcohol] = useState("");
   const [error, setError] = useState("");
-  const [gif, setGif] = useState("");
+  // const [gif, setGif] = useState("");
   const [random, setRandom] = useState("");
-  const [cocktailId, setCocktailId] = useState("");
 
   const savedIds = useMemo(() => {
     return props.saved.map((drink) => drink.id);
@@ -83,37 +82,7 @@ const Search = (props) => {
       setAlcohol([]);
     }
   }
-  async function getByCocktailId(cocktailId) {
-    const url = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${cocktailId}`;
-    try {
-      setError("");
-      let response = await fetch(url);
-      let json = await response.json();
-      let resCocktails = json.drinks.map((val) => {
-        let ingredients = [];
-        for (let i = 1; i <= 15; i++) {
-          if (val[`strIngredient${i}`] ) {
-            ingredients.push({
-              ingredient: val[`strIngredient${i}`],
-              measure: val[`strMeasure${i}`],
-            });
-          }
-        }
-        return {
-          drink: val.strDrink,
-          thumbnail: val.strDrinkThumb,
-          ingredients: ingredients,
-          instructions: val.strInstructions,
-          id: val.idDrink,
-        };
-      });
-      props.setSearch(resCocktails);
-    } catch (e) {
-      setError("Something went wrong. Check your search parameters.");
-      setCocktailId([]);
-    }
-  }
-
+  
   async function getRandom() {
     const url = `https://www.thecocktaildb.com/api/json/v2/9973533/random.php`;
     try {
@@ -145,14 +114,14 @@ const Search = (props) => {
     }
   }
 
-  async function getGifs() {
+  async function setGif() {
     const url = `https://api.giphy.com/v1/gifs/random?api_key=pNd73F2GiTlIEcEnhFBLj9s6WZboo1qp&tag=drunk&rating=pg`;
     let response = await fetch(url);
     let json = await response.json();
     let resGifs = json.data.images.original.url;
     console.log(json);
 
-    setGif(resGifs);
+    props.setGif(resGifs);
   }
 
   return (
@@ -178,7 +147,7 @@ const Search = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 getCocktails(query);
-                getGifs();
+                setGif();
               }}
             >
               I'm Thirsty!
@@ -210,7 +179,7 @@ const Search = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 getByAlcohol(alcohol);
-                getGifs();
+                setGif();
               }}
             >
               Get Me a Drink!
@@ -225,7 +194,7 @@ const Search = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 getRandom(random);
-                getGifs();
+                setGif();
               }}
             >
               Get Me Anything!
@@ -241,13 +210,12 @@ const Search = (props) => {
               <div>
                 {props.drinks.map((v) => (
                   <CocktailDisplay
-                    gif={gif}
+                    gif={props.setGif}
                     key={v.id}
                     drink={v}
                     isSaved={savedIds.includes(v.id)}
                     deleteSaved={props.deleteSaved}
                     addSaved={props.addSaved}
-                    moreInfo={props.moreInfo}
                   />
                 ))}
               </div>
@@ -271,6 +239,7 @@ const Search = (props) => {
 const mapDispatchToProps = {
   setSearch,
   setUser,
+  setGif,
   addSaved,
   deleteSaved,
 };
