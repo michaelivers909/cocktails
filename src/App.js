@@ -14,16 +14,18 @@ import "./App.css";
 import axios from "axios";
 import { useSelectors, useActionCreators } from "use-redux";
 import { usernameSelector, userSelector } from "./redux/selectors/UserSelectors";
-import { clearUser, setUser } from "./redux/actions";
+import { clearSearch, clearUser, clearSaved, setUser } from "./redux/actions";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./shared/ProtectedRoute";
 
 function App() {
   const [globalState, setGlobalState] = useState(initialState);
   const [username, user] = useSelectors(usernameSelector, userSelector);
-  const [clearUserFromState, setUserInState] = useActionCreators(
+  const [clearUserFromState, setUserInState, clearSearchInState, clearSavedInState] = useActionCreators(
     clearUser,
-    setUser
+    setUser,
+    clearSearch,
+    clearSaved
   );
 
   const isAuth = useMemo(() => {
@@ -42,7 +44,7 @@ function App() {
   async function logout() {
     try {
       const { data } = await axios("/users/logout");
-      clearUserFromState();
+      clearUserFromState(), clearSearchInState(), clearSavedInState();
     } catch (err) {
 
     }
@@ -92,5 +94,7 @@ function App() {
     </DrinkContext.Provider>
   );
 }
+
+
 
 export default App;

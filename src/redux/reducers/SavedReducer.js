@@ -1,4 +1,4 @@
-import { ADD_SAVED, DELETE_SAVED } from "../actions";
+import { ADD_SAVED, DELETE_SAVED, CLEAR_SAVED } from "../actions";
 
 function savedReducer(state = [], action) {
   switch (action.type) {
@@ -9,6 +9,9 @@ function savedReducer(state = [], action) {
       let idx = newState.findIndex((cocktail) => cocktail.id === action.id);
       newState.splice(idx, 1);
       return newState;
+    case CLEAR_SAVED:
+      let clearState = [];
+      return clearState;
     default:
       return state;
   }
