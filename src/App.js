@@ -44,7 +44,9 @@ function App() {
   async function logout() {
     try {
       const { data } = await axios("/users/logout");
-      clearUserFromState(), clearSearchInState(), clearSavedInState();
+      clearUserFromState(); 
+      clearSearchInState(); 
+      clearSavedInState();
     } catch (err) {
 
     }

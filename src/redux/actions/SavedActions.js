@@ -10,6 +10,6 @@ export function deleteSaved(id) {
   return { type: DELETE_SAVED, id: id };
 }
 
-export function clearSaved(gif, drink) {
-  return { type: CLEAR_SAVED, saved: drink, gif: gif };
+export function clearSaved() {
+  return { type: CLEAR_SAVED};
 }

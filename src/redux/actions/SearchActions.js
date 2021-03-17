@@ -6,5 +6,5 @@ export function setSearch(results) {
 }
 
 export function clearSearch() {
-    return {type: CLEAR_SEARCH, search: [] };
+    return {type: CLEAR_SEARCH};
 }
