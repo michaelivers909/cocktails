@@ -1,4 +1,4 @@
-import { ADD_SAVED, DELETE_SAVED, CLEAR_SAVED } from "../actions";
+import { ADD_SAVED, DELETE_SAVED, CLEAR_SAVED, GET_SAVED } from "../actions";
 
 function savedReducer(state = [], action) {
   switch (action.type) {
@@ -14,6 +14,8 @@ function savedReducer(state = [], action) {
       return clearState;
     default:
       return state;
+    case GET_SAVED:
+      return [{...action.saved, cocktail: action.id}];
   }
 }
 

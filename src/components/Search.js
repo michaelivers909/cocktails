@@ -3,6 +3,7 @@ import { alcoholTypes } from "../shared/AlcoholTypes";
 import { setSearch, setUser, setGif, addSaved, deleteSaved } from "../redux/actions";
 import { connect } from "react-redux";
 import CocktailDisplay from "./CocktailDisplay";
+import axios from "axios";
 
 const Search = (props) => {
   const [query, setQuery] = useState("");
@@ -11,7 +12,7 @@ const Search = (props) => {
   const [random, setRandom] = useState("");
 
   const savedIds = useMemo(() => {
-    return props.saved.map((drink) => drink.id);
+    return props.saved.map((drink) => drink.drink_id);
   }, [props.saved]);
 
   async function getCocktails(query) {
@@ -35,7 +36,7 @@ const Search = (props) => {
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
           instructions: val.strInstructions,
-          id: val.idDrink,
+          drink_id: val.idDrink,
         };
       });
       console.log(resCocktails)
@@ -68,7 +69,7 @@ const Search = (props) => {
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
           instructions: val.strInstructions,
-          id: val.idDrink,
+          drink_id: val.idDrink,
         };
       });
       const shuffled = [...resCocktails].sort(() => 0.5 - Math.random());
@@ -103,7 +104,7 @@ const Search = (props) => {
           thumbnail: val.strDrinkThumb,
           ingredients: ingredients,
           instructions: val.strInstructions,
-          id: val.idDrink,
+          drink_id: val.idDrink,
         };
       });
       props.setSearch(resCocktails);
@@ -114,7 +115,7 @@ const Search = (props) => {
   }
 
   async function getGif() {
-    const url = `https://api.giphy.com/v1/gifs/random?api_key=pNd73F2GiTlIEcEnhFBLj9s6WZboo1qp&tag=drunk&rating=pg`;
+    const url = `https://api.giphy.com/v1/gifs/random?api_key=pNd73F2GiTlIEcEnhFBLj9s6WZboo1qp&tag=drunk&rating=r`;
     let response = await fetch(url);
     let json = await response.json();
     let resGifs = json.data.images.original.url;
@@ -122,6 +123,31 @@ const Search = (props) => {
 
     props.setGif(resGifs);
   }
+  async function setSavedDb(drink, gif) {
+    try {
+      const json = await axios.post("/saved/add", {
+          drink,
+          gif
+      });
+      console.log(json);
+      if (json.data.error) {
+        setError(json.data.error);
+      } else {
+        props.addSaved(drink, gif);
+        
+      }
+    } catch (err) {
+      setError("Something went wrong, please try again later.");
+    }
+
+    // async function deleteSavedDb(id) {
+      // try {
+        // const jason = 
+      // }
+    // }
+}
+
+
 
   return (
     <>
@@ -141,7 +167,7 @@ const Search = (props) => {
             />
           </div>
           <div>
-            <button
+            <button style={{marginBottom: "15px"}}
               className="submit"
               onClick={(e) => {
                 e.preventDefault();
@@ -173,7 +199,7 @@ const Search = (props) => {
             </div>
           </div>
           <div>
-            <button
+            <button style={{marginBottom: "15px"}}
               className="submit"
               onClick={(e) => {
                 e.preventDefault();
@@ -188,7 +214,7 @@ const Search = (props) => {
             <div>
               <label>Get a Random Cocktail</label>
             </div>
-            <button
+            <button style={{marginBottom: "10px"}}
               className="submit"
               onClick={(e) => {
                 e.preventDefault();
@@ -210,11 +236,11 @@ const Search = (props) => {
                 {props.drinks.map((v) => (
                   <CocktailDisplay
                     gif={props.gif}
-                    key={v.id}
+                    key={v.drink_id}
                     drink={v}
-                    isSaved={savedIds.includes(v.id)}
+                    isSaved={savedIds.includes(v.drink_id)}
                     deleteSaved={props.deleteSaved}
-                    addSaved={props.addSaved}
+                    addSaved={setSavedDb}
                   />
                 ))}
               </div>

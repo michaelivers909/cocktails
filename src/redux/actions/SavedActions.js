@@ -1,6 +1,7 @@
 export const ADD_SAVED = "Add Saved";
 export const DELETE_SAVED = "Delete Saved";
 export const CLEAR_SAVED = "Clear Saved";
+export const GET_SAVED = "Get Saved";
 
 export function addSaved(gif, drink) {
   return { type: ADD_SAVED, saved: drink, gif: gif };
@@ -12,4 +13,8 @@ export function deleteSaved(id) {
 
 export function clearSaved() {
   return { type: CLEAR_SAVED};
+}
+ 
+export function getSaved() {
+  return { type: GET_SAVED};
 }

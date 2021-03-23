@@ -45,11 +45,11 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved}) => {
       <img className="img-gif center" src={gif} alt="drunk gif" />
       <h3>{drink.drink}</h3>
       <img className="img-drink center" src={drink.thumbnail}></img>
-      <div>
+      <div> 
         {drink.ingredients.map((v, i) => {
           return (
             <div key={i}>
-              Ingredient {i + 1}: {v.ingredient}, &nbsp;&nbsp; Measurement:{" "}
+              Ingredient {i + 1}: {v.ingredient}, &nbsp;&nbsp; Measurement: {" "}
               {v.measure}
             </div>
           );
@@ -60,7 +60,7 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved}) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            addSaved(gif, drink);
+            addSaved(drink, gif);
           }}
         >
           {" "}
@@ -71,7 +71,7 @@ const CocktailDisplay = ({ drink, gif, addSaved, deleteSaved, isSaved}) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            deleteSaved(drink.id);
+            deleteSaved(drink.drink_id);
           }}
         >
           {" "}

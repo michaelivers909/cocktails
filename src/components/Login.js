@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import Background from "../shared/bartender2.png";
-import { setUser } from "../redux/actions";
+import { setUser, getSaved } from "../redux/actions";
+import { useActionCreators } from "use-redux";
 
-const Login = (props) => {
+const Login = (props) => { 
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [getSavedFromState] = useActionCreators(
+    getSaved
+  );
 
   async function login() {
     setError("");
@@ -74,6 +78,7 @@ const Login = (props) => {
               onClick={(e) => {
                 e.preventDefault();
                 login();
+                getSaved();
               }}
             >
               Log In
