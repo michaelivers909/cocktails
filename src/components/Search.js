@@ -4,6 +4,7 @@ import { setSearch, setUser, setGif, addSaved, deleteSaved } from "../redux/acti
 import { connect } from "react-redux";
 import CocktailDisplay from "./CocktailDisplay";
 import axios from "axios";
+import { json } from "express";
 
 const Search = (props) => {
   const [query, setQuery] = useState("");
@@ -133,19 +134,30 @@ const Search = (props) => {
       if (json.data.error) {
         setError(json.data.error);
       } else {
-        props.addSaved(drink, gif);
+        props.addSaved(gif, drink);
         
       }
     } catch (err) {
       setError("Something went wrong, please try again later.");
     }
+  }
 
-    // async function deleteSavedDb(id) {
+    // async function deleteSavedDb(drink_id) {
       // try {
-        // const jason = 
+        // const jason = await axios.delete(`/saved/delete/${drink_id}`, {
+          // drink_id
+      // });
+      // if(json.data.error) {
+        // setError(json.data.error);
+      // } else {
+        // props.deleteSaved(drink_id);
       // }
+    // } catch (err) {
+      // setError("Something went wrong, please try again later.");
     // }
-}
+  // };
+  
+
 
 
 
@@ -239,7 +251,7 @@ const Search = (props) => {
                     key={v.drink_id}
                     drink={v}
                     isSaved={savedIds.includes(v.drink_id)}
-                    deleteSaved={props.deleteSaved}
+                    deleteSaved={deleteSaved}
                     addSaved={setSavedDb}
                   />
                 ))}
